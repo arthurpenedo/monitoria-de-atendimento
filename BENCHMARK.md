@@ -2,17 +2,17 @@
 
 | Item | Acerto | Baseline (sempre ok) |
 |---|---|---|
-| saudacao | 100.0% | 60.0% |
-| identidade | 87.8% | 60.0% |
-| resolucao | 100.0% | 62.6% |
-| oferta | 100.0% | 65.2% |
-| lgpd | 97.6% | 64.4% |
-| **média** | **97.1%** | 62.4% |
+| saudacao | 100.0% | 58.4% |
+| identidade | 81.2% | 65.0% |
+| resolucao | 100.0% | 59.4% |
+| oferta | 100.0% | 59.6% |
+| lgpd | 94.6% | 64.6% |
+| **média** | **95.2%** | 61.4% |
 
 ## Nota média (0-100)
 
-- ligações sem nenhuma falha rotulada (n=41): 96.6
-- ligações com pelo menos uma falha rotulada (n=459): 60.5
+- ligações sem nenhuma falha rotulada (n=41): 90.2
+- ligações com pelo menos uma falha rotulada (n=459): 57.7
 
 ## Casos escritos à mão: 10/10
 
@@ -21,7 +21,7 @@
 ## Primeiros desacordos com o rótulo
 
 - identidade: rótulo ok, regra falha
-- identidade: rótulo ok, regra falha
+- lgpd: rótulo ok, regra falha
 - identidade: rótulo ok, regra falha
 - identidade: rótulo ok, regra falha
 - identidade: rótulo ok, regra falha

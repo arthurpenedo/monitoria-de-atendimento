@@ -38,7 +38,9 @@ IDENTIDADE_OK = (
     "Antes de seguir, vou validar sua identidade. Qual é o seu nome completo?",
     "Pode me informar os últimos dígitos do seu documento para eu confirmar o cadastro?",
     "Só para eu ter certeza de que falo com o titular, me diga nome completo e data de nascimento.",
-    "Pode me falar o nome da sua mãe e o seu CEP para eu liberar o atendimento?",  # paráfrase fora das regras
+    "Pode me falar o nome da sua mãe e o seu CEP para eu liberar o atendimento?",  # coberta desde a parte 2
+    "Qual é o e-mail e o telefone com DDD que o senhor cadastrou conosco?",  # paráfrase fora das regras
+    "Me conta de onde o senhor está ligando e qual é a data do seu aniversário, por favor.",  # idem
 )
 IDENTIDADE_RUIM = (
     "Certo, já estou olhando aqui.",

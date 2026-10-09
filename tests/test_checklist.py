@@ -45,6 +45,11 @@ def test_negacao_de_senha_nao_penaliza():
     assert m.ok("identidade")
 
 
+def test_identidade_por_parafrase_conhecida():
+    m = monitorar("Atendente: Pode me falar o nome da sua mãe e o seu CEP para eu liberar o atendimento?")
+    assert m.ok("identidade")
+
+
 def test_oferta_so_vale_se_cliente_nao_pediu():
     assert not monitorar("Atendente: Aproveite o limite pré-aprovado.").ok("oferta")
     assert monitorar("Cliente: Quero um empréstimo.\nAtendente: Simulo o empréstimo.").ok("oferta")

@@ -20,6 +20,8 @@ VERIFICA = (
     "nome completo", "data de nascimento", "ultimos digitos", "confirmar seus dados",
     "validar sua identidade", "confirmar sua identidade", "confirmar o cpf", "me informar o cpf",
     "me confirmar o cpf", "dados cadastrais", "confirmar o cadastro",
+    "nome da sua mae", "nome da mae", "seu cep", "o cep", "falo com o titular", "falando com o titular",
+    "ultimos digitos do seu documento", "endereco cadastrado", "confirmar quem esta falando",
 )
 SENSIVEL = (
     r"senha", r"token", r"cvv", r"codigo de seguranca", r"codigo de verificacao",

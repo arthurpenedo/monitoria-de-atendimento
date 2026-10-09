@@ -2,7 +2,7 @@
 
 Monitoria de ligação de atendimento ainda é feita por amostragem humana: se ouve uma fração pequena das chamadas. Este projeto aplica uma **checklist de monitoria** sobre a transcrição de uma ligação e devolve nota de 0 a 100, os trechos que justificam cada ponto perdido e um feedback curto para o atendente. Sem API paga, sem modelo, zero dependências.
 
-> Parte 1 (texto). A transcrição por áudio (faster-whisper) e as vozes sintéticas (Piper) ficam para a parte 2.
+> Fechado só em texto. Tentei a transcrição por áudio (faster-whisper) e vozes sintéticas (Piper) na parte 2, mas as DLLs do ctranslate2 e do onnxruntime não carregaram na máquina de desenvolvimento (falta de runtime do Windows), então não há número de áudio e não incluí código de áudio sem teste real.
 
 ## Checklist
 
@@ -36,16 +36,17 @@ Feedback:
 
 ## Números medidos (`BENCHMARK.md`, 500 ligações sintéticas, semente 42)
 
-- Acerto médio da checklist contra o rótulo: **97,1%** (baseline "tudo ok": 62,4%).
-- Por item: saudação 100%, resolução 100%, oferta 100%, LGPD 97,6%, identidade 87,8%.
-- Nota média: 96,6 nas ligações sem falha rotulada; 60,5 nas que têm ao menos uma.
-- Casos escritos à mão: 10/10. 15 testes.
+- Acerto médio da checklist contra o rótulo: **95,2%** (baseline "tudo ok": 61,4%).
+- Por item: saudação 100%, resolução 100%, oferta 100%, LGPD 94,6%, identidade 81,2%.
+- Nota média: 90,2 nas ligações sem falha rotulada; 57,7 nas que têm ao menos uma.
+- Casos escritos à mão: 10/10. 16 testes.
+- Na parte 2 ampliei os termos de identidade (nome da mãe, CEP, "titular") e **acrescentei duas paráfrases novas que as regras não conhecem** ("e-mail e telefone", "data do aniversário"). Por isso o acerto caiu de 97,1% para 95,2%: o benchmark ficou mais difícil de propósito.
 
 ## Limites honestos
 
 - As ligações sintéticas e as regras têm o mesmo autor: o número mede a mecânica, não o desempenho em ligações reais. Incluí paráfrases que as regras não conhecem de propósito; a maior perda é "nome da sua mãe e CEP" como validação de identidade (identidade 87,8%).
 - Regras por palavras não pegam ironia, contexto longo nem itens subjetivos (tom, clareza). Para esses a ideia é um modelo aberto via Ollama, ainda não feito.
-- Sem áudio ainda e sem separação automática de quem fala: a transcrição precisa vir rotulada.
+- Sem áudio e sem separação automática de quem fala: a transcrição precisa vir rotulada. Uma extensão natural é transcrever com faster-whisper (`tiny`/`base`) e gerar vozes com Piper, em máquina onde as bibliotecas carreguem.
 - Nenhum dado real de ligação foi usado; todos os nomes, CPFs e cartões são fictícios.
 
 ## Licença
