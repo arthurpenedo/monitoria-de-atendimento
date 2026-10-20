@@ -1,5 +1,7 @@
 # monitoria-de-atendimento
 
+[![CI](https://github.com/arthurpenedo/monitoria-de-atendimento/actions/workflows/ci.yml/badge.svg)](https://github.com/arthurpenedo/monitoria-de-atendimento/actions/workflows/ci.yml)
+
 Monitoria de ligação de atendimento ainda é feita por amostragem humana: se ouve uma fração pequena das chamadas. Este projeto aplica uma **checklist de monitoria** sobre a transcrição de uma ligação e devolve nota de 0 a 100, os trechos que justificam cada ponto perdido e um feedback curto para o atendente. Sem API paga, sem modelo, zero dependências.
 
 > Fechado só em texto. Tentei a transcrição por áudio (faster-whisper) e vozes sintéticas (Piper) na parte 2, mas as DLLs do ctranslate2 e do onnxruntime não carregaram na máquina de desenvolvimento (falta de runtime do Windows), então não há número de áudio e não incluí código de áudio sem teste real.
