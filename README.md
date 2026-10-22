@@ -44,6 +44,9 @@ Feedback:
 - Casos escritos à mão: 10/10. 16 testes.
 - Na parte 2 ampliei os termos de identidade (nome da mãe, CEP, "titular") e **acrescentei duas paráfrases novas que as regras não conhecem** ("e-mail e telefone", "data do aniversário"). Por isso o acerto caiu de 97,1% para 95,2%: o benchmark ficou mais difícil de propósito.
 
+## Página de demo
+`monitoria-de-atendimento demo --saida site/index.html` gera uma página estática com ligações sintéticas ao lado do relatório de monitoria (nota e trechos que justificam). O workflow `.github/workflows/pagina.yml` publica no GitHub Pages a cada push na `main` (ativar uma vez em Settings → Pages → Source = GitHub Actions). Link: https://arthurpenedo.github.io/monitoria-de-atendimento/ (vale depois da primeira execução).
+
 ## Limites honestos
 
 - As ligações sintéticas e as regras têm o mesmo autor: o número mede a mecânica, não o desempenho em ligações reais. Incluí paráfrases que as regras não conhecem de propósito; a maior perda é "nome da sua mãe e CEP" como validação de identidade (identidade 87,8%).
