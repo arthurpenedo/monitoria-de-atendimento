@@ -41,7 +41,7 @@ Feedback:
 - Acerto médio da checklist contra o rótulo: **95,2%** (baseline "tudo ok": 61,4%).
 - Por item: saudação 100%, resolução 100%, oferta 100%, LGPD 94,6%, identidade 81,2%.
 - Nota média: 90,2 nas ligações sem falha rotulada; 57,7 nas que têm ao menos uma.
-- Casos escritos à mão: 10/10. 16 testes.
+- Casos escritos à mão: 10/10. 18 testes.
 - Na parte 2 ampliei os termos de identidade (nome da mãe, CEP, "titular") e **acrescentei duas paráfrases novas que as regras não conhecem** ("e-mail e telefone", "data do aniversário"). Por isso o acerto caiu de 97,1% para 95,2%: o benchmark ficou mais difícil de propósito.
 
 ## Página de demo
