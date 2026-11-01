@@ -3,7 +3,12 @@ import re
 import pytest
 
 from monitoria_de_atendimento.benchmark import acerto_curados, rodar
-from monitoria_de_atendimento.checklist import PESOS, ler_transcricao, monitorar, relatorio
+from monitoria_de_atendimento.checklist import (
+    PESOS,
+    ler_transcricao,
+    monitorar,
+    relatorio,
+)
 from monitoria_de_atendimento.cli import main
 from monitoria_de_atendimento.sintetico import gerar_lote
 
