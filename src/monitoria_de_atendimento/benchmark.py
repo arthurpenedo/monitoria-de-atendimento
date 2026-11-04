@@ -31,8 +31,8 @@ def acerto_curados() -> tuple[int, int, list[str]]:
 
 def rodar(n: int = 500, semente: int = 42) -> str:
     lote = gerar_lote(n, semente)
-    certos = {i: 0 for i in ITENS}
-    base = {i: 0 for i in ITENS}
+    certos = dict.fromkeys(ITENS, 0)
+    base = dict.fromkeys(ITENS, 0)
     notas_boas, notas_ruins = [], []
     erros: list[str] = []
     for lig in lote:
