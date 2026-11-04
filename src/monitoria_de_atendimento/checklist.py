@@ -140,8 +140,8 @@ def _saudacao(at: list[tuple[int, str, str]]) -> ResultadoItem:
 
 def _identidade(at: list[tuple[int, str, str]]) -> tuple[ResultadoItem, int | None]:
     """Devolve também o índice da primeira fala que valida identidade (para a ordem do LGPD)."""
-    for i, bruto, t in at:
-        pedido = _sensivel_pedido(t)
+    for _, bruto, t in at:
+        pedido =_sensivel_pedido(t)
         if pedido:
             return ResultadoItem(0, [f"pede dado sensível (\"{pedido}\"): \"{_trecho(bruto)}\""]), None
     for i, bruto, t in at:
