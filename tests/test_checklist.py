@@ -101,3 +101,21 @@ def test_cli_avaliar(tmp_path, capsys):
 
 def test_relatorio_lista_feedback():
     assert "Feedback:" in relatorio(monitorar("Atendente: Pois não?"))
+
+
+def test_cli_gerar_imprime_ligacoes_com_rotulo(capsys):
+    from monitoria_de_atendimento.cli import main
+
+    assert main(["gerar", "--n", "2", "--semente", "1"]) == 0
+    saida = capsys.readouterr().out
+    assert "--- ligação 1 (falhas esperadas:" in saida
+    assert "--- ligação 2 (falhas esperadas:" in saida
+    assert "Atendente:" in saida
+
+
+def test_cli_benchmark_grava_saida(tmp_path, capsys):
+    from monitoria_de_atendimento.cli import main
+
+    arq = tmp_path / "b.md"
+    assert main(["benchmark", "--n", "20", "--saida", str(arq)]) == 0
+    assert arq.read_text(encoding="utf-8").strip() == capsys.readouterr().out.strip()
