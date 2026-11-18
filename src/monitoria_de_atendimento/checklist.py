@@ -111,7 +111,8 @@ class Monitoria:
 
 def _palavra(termo: str, texto: str, fim: bool = True) -> bool:
     """Termo começando em limite de palavra (e terminando nele, se `fim`): \"em ate\" não casa com \"tem ate\"."""
-    return re.search(rf"\b{re.escape(termo)}{r'\b' if fim else ''}", texto) is not None
+    padrao = r"\b" + re.escape(termo) + (r"\b" if fim else "")
+    return re.search(padrao, texto) is not None
 
 
 def _trecho(texto: str, n: int = 90) -> str:
