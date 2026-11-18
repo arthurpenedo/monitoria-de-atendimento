@@ -109,6 +109,11 @@ class Monitoria:
         return [DICAS[i] for i in ITENS if not self.ok(i)]
 
 
+def _palavra(termo: str, texto: str, fim: bool = True) -> bool:
+    """Termo começando em limite de palavra (e terminando nele, se `fim`): \"em ate\" não casa com \"tem ate\"."""
+    return re.search(rf"\b{re.escape(termo)}{r'\b' if fim else ''}", texto) is not None
+
+
 def _trecho(texto: str, n: int = 90) -> str:
     return texto if len(texto) <= n else texto[: n - 1] + "…"
 
@@ -127,7 +132,7 @@ def _saudacao(at: list[tuple[int, str, str]]) -> ResultadoItem:
     if not at:
         return ResultadoItem(0, ["sem fala do atendente"])
     _, bruto, t = at[0]
-    cumprimenta = any(c in t for c in CUMPRIMENTO)
+    cumprimenta = any(_palavra(c, t) for c in CUMPRIMENTO)  # "ola" não vale dentro de "escola"
     apresenta = any(a in t for a in SE_APRESENTA)
     pontos = (8 if cumprimenta else 0) + (7 if apresenta else 0)
     ev = [f"primeira fala: \"{_trecho(bruto)}\""]
@@ -152,7 +157,7 @@ def _identidade(at: list[tuple[int, str, str]]) -> tuple[ResultadoItem, int | No
 
 def _resolucao(at: list[tuple[int, str, str]]) -> ResultadoItem:
     acao = next(((b, a) for _, b, t in at for a in ACAO if a in t), None)
-    encerra = next(((b, e) for _, b, t in reversed(at) for e in ENCERRA if e in t), None)
+    encerra = next(((b, e) for _, b, t in reversed(at) for e in ENCERRA if _palavra(e, t, fim=False)), None)
     pontos = (15 if acao else 0) + (10 if encerra else 0)
     ev = []
     ev.append(f"ação/protocolo (\"{acao[1]}\"): \"{_trecho(acao[0])}\"" if acao else "nenhuma ação ou protocolo informado")
