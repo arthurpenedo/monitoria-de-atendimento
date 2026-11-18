@@ -115,6 +115,21 @@ def _palavra(termo: str, texto: str, fim: bool = True) -> bool:
     return re.search(padrao, texto) is not None
 
 
+def _cpf_valido(numero: str) -> bool:
+    d = [int(c) for c in numero if c.isdigit()]
+    if len(d) != 11 or len(set(d)) == 1:
+        return False
+    for n in (9, 10):
+        if (sum(d[i] * (n + 1 - i) for i in range(n)) * 10) % 11 % 10 != d[n]:
+            return False
+    return True
+
+
+def _le_cpf(t: str) -> bool:
+    """Só conta CPF com dígitos verificadores certos: protocolo de 11 dígitos não é CPF."""
+    return any(_cpf_valido(m.group(0)) for m in CPF.finditer(t))
+
+
 def _trecho(texto: str, n: int = 90) -> str:
     return texto if len(texto) <= n else texto[: n - 1] + "…"
 
@@ -178,7 +193,7 @@ def _oferta(at: list[tuple[int, str, str]], cliente: str) -> ResultadoItem:
 def _lgpd(at: list[tuple[int, str, str]], idx_valida: int | None) -> ResultadoItem:
     ev = []
     for i, bruto, t in at:
-        if CPF.search(t) or CARTAO.search(t):
+        if _le_cpf(t) or CARTAO.search(t):
             ev.append(f"lê CPF ou cartão inteiro: \"{_trecho(bruto)}\"")
         if idx_valida is None or i < idx_valida:
             for padrao in DADO_ANTES_DE_VALIDAR:
