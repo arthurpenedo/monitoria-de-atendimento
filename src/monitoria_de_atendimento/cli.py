@@ -33,15 +33,22 @@ def main(argv: list[str] | None = None) -> int:
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")  # consoles Windows em cp1252 quebram com "→" e aspas
     if args.cmd == "avaliar":
+        if not Path(args.arquivo).is_file():
+            print(f"Arquivo não encontrado: {args.arquivo}", file=sys.stderr)
+            return 2
         print(relatorio(monitorar(Path(args.arquivo).read_text(encoding="utf-8"))))
     elif args.cmd == "gerar":
         for k, lig in enumerate(gerar_lote(args.n, args.semente), 1):
             falhas = [i for i, ok in lig.rotulo.items() if not ok]
             print(f"--- ligação {k} (falhas esperadas: {', '.join(falhas) or 'nenhuma'}) ---\n{lig.texto()}\n")
     elif args.cmd == "benchmark":
+        if args.n < 1:
+            print("--n precisa ser 1 ou mais.", file=sys.stderr)
+            return 2
         texto = rodar(args.n, args.semente)
         print(texto)
         if args.saida:
+            Path(args.saida).parent.mkdir(parents=True, exist_ok=True)
             Path(args.saida).write_text(texto + "\n", encoding="utf-8")
     elif args.cmd == "demo":
         from .demo import gerar_html
