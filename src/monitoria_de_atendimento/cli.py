@@ -38,6 +38,9 @@ def main(argv: list[str] | None = None) -> int:
             return 2
         print(relatorio(monitorar(Path(args.arquivo).read_text(encoding="utf-8"))))
     elif args.cmd == "gerar":
+        if args.n < 1:
+            print("--n precisa ser 1 ou mais.", file=sys.stderr)
+            return 2
         for k, lig in enumerate(gerar_lote(args.n, args.semente), 1):
             falhas = [i for i, ok in lig.rotulo.items() if not ok]
             print(f"--- ligação {k} (falhas esperadas: {', '.join(falhas) or 'nenhuma'}) ---\n{lig.texto()}\n")
@@ -52,6 +55,9 @@ def main(argv: list[str] | None = None) -> int:
             Path(args.saida).write_text(texto + "\n", encoding="utf-8")
     elif args.cmd == "demo":
         from .demo import gerar_html
+        if args.quantas < 1:
+            print("--quantas precisa ser 1 ou mais.", file=sys.stderr)
+            return 2
         saida = Path(args.saida)
         saida.parent.mkdir(parents=True, exist_ok=True)
         saida.write_text(gerar_html(args.quantas), encoding="utf-8")

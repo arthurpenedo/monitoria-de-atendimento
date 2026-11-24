@@ -15,3 +15,14 @@ def test_benchmark_saida_cria_a_pasta(tmp_path):
     saida = tmp_path / "novo" / "bench.txt"
     assert main(["benchmark", "--n", "5", "--saida", str(saida)]) == 0
     assert saida.read_text(encoding="utf-8").strip()
+
+
+def test_gerar_n_zero_devolve_2(capsys):
+    assert main(["gerar", "--n", "0"]) == 2
+    assert "1 ou mais" in capsys.readouterr().err
+
+
+def test_demo_quantas_zero_nao_grava_pagina(tmp_path, capsys):
+    saida = tmp_path / "p.html"
+    assert main(["demo", "--quantas", "0", "--saida", str(saida)]) == 2
+    assert not saida.exists()
