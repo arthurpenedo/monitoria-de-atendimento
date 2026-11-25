@@ -29,6 +29,14 @@ def test_saida_apontando_para_pasta_devolve_2(tmp_path, capsys):
     assert "pasta" in capsys.readouterr().err
 
 
+def test_saida_dentro_de_arquivo_devolve_2_sem_traceback(tmp_path, capsys):
+    arq = tmp_path / "arq.txt"
+    arq.write_text("x", encoding="utf-8")
+    assert main(["benchmark", "--n", "1", "--saida", str(arq / "x.md")]) == 2
+    assert main(["demo", "--saida", str(arq / "x.html")]) == 2
+    assert "passa por um arquivo" in capsys.readouterr().err
+
+
 def test_benchmark_n_zero_devolve_2(capsys):
     assert main(["benchmark", "--n", "0"]) == 2
     assert "1 ou mais" in capsys.readouterr().err

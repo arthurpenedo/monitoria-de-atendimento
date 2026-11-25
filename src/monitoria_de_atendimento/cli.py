@@ -35,6 +35,9 @@ def main(argv: list[str] | None = None) -> int:
     if getattr(args, "saida", None) and Path(args.saida).is_dir():
         print(f"--saida aponta para uma pasta ({args.saida}); informe um arquivo.", file=sys.stderr)
         return 2
+    if getattr(args, "saida", None) and any(a.is_file() for a in Path(args.saida).parents):
+        print(f"--saida passa por um arquivo ({args.saida}); informe um caminho dentro de uma pasta.", file=sys.stderr)
+        return 2
     if args.cmd == "avaliar":
         if not Path(args.arquivo).is_file():
             print(f"Arquivo não encontrado: {args.arquivo}", file=sys.stderr)
