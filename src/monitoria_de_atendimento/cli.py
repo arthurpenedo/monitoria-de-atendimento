@@ -36,7 +36,13 @@ def main(argv: list[str] | None = None) -> int:
         if not Path(args.arquivo).is_file():
             print(f"Arquivo não encontrado: {args.arquivo}", file=sys.stderr)
             return 2
-        print(relatorio(monitorar(Path(args.arquivo).read_text(encoding="utf-8"))))
+        try:
+            # utf-8-sig: o Bloco de Notas do Windows grava o BOM no começo do arquivo
+            texto = Path(args.arquivo).read_text(encoding="utf-8-sig")
+            print(relatorio(monitorar(texto)))
+        except (UnicodeDecodeError, ValueError) as erro:
+            print(f"Não consegui avaliar {args.arquivo}: {erro}", file=sys.stderr)
+            return 2
     elif args.cmd == "gerar":
         if args.n < 1:
             print("--n precisa ser 1 ou mais.", file=sys.stderr)
