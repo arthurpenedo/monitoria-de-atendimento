@@ -32,6 +32,9 @@ def main(argv: list[str] | None = None) -> int:
     args = p.parse_args(argv)
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")  # consoles Windows em cp1252 quebram com "→" e aspas
+    if getattr(args, "saida", None) and Path(args.saida).is_dir():
+        print(f"--saida aponta para uma pasta ({args.saida}); informe um arquivo.", file=sys.stderr)
+        return 2
     if args.cmd == "avaliar":
         if not Path(args.arquivo).is_file():
             print(f"Arquivo não encontrado: {args.arquivo}", file=sys.stderr)

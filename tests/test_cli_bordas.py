@@ -23,6 +23,12 @@ def test_avaliar_arquivo_fora_de_utf8_ou_sem_falantes_devolve_2(tmp_path, capsys
     assert "Não consegui avaliar" in capsys.readouterr().err
 
 
+def test_saida_apontando_para_pasta_devolve_2(tmp_path, capsys):
+    assert main(["benchmark", "--n", "1", "--saida", str(tmp_path)]) == 2
+    assert main(["demo", "--saida", str(tmp_path)]) == 2
+    assert "pasta" in capsys.readouterr().err
+
+
 def test_benchmark_n_zero_devolve_2(capsys):
     assert main(["benchmark", "--n", "0"]) == 2
     assert "1 ou mais" in capsys.readouterr().err
